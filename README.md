@@ -4,20 +4,6 @@ A TurtleBot3 (carrying a cup of water) drives to a random target point while spi
 **real water** as possible. Trained with Stable-Baselines3 (SAC); the cup holds real PBD fluid
 and the reward uses the fraction of water remaining.
 
----
-
-## 0. Prerequisites
-
-- **Python (conda env):** `/home/shareduser/anaconda3/envs/env_isaaclab_opt/bin/python`
-- The commands below use `PY` for it:
-  ```bash
-  PY=/home/shareduser/anaconda3/envs/env_isaaclab_opt/bin/python
-  ```
-- **You must `cd` into this folder first** (scripts load `turtlebot3_waffle_cup/` via relative paths):
-  ```bash
-  cd /home/shareduser/IsaacLab/RL/tb3
-  ```
-
 ## Files
 | File | Purpose |
 |---|---|
@@ -33,8 +19,7 @@ and the reward uses the fraction of water remaining.
 ## 1. Training
 
 ```bash
-cd /home/shareduser/IsaacLab/RL/tb3
-$PY train_tb3_water.py --timesteps 200000
+python3 train_tb3_water.py --timesteps 200000
 ```
 
 When it finishes, this folder will contain:
@@ -68,8 +53,7 @@ When it finishes, this folder will contain:
 
 During or after training, **open a second terminal**:
 ```bash
-cd /home/shareduser/IsaacLab/RL/tb3
-/home/shareduser/anaconda3/envs/env_isaaclab_opt/bin/tensorboard --logdir tb_tb3_water
+tensorboard --logdir tb_tb3_water
 ```
 Open **http://localhost:6006** in a browser (for remote access replace `localhost` with the
 machine IP and add `--bind_all`).
@@ -88,8 +72,7 @@ machine IP and add `--bind_all`).
 ## 3. Demo / Play (watch the trained policy)
 
 ```bash
-cd /home/shareduser/IsaacLab/RL/tb3
-$PY play_tb3_water.py --model sac_tb3_water --episodes 5
+python3 play_tb3_water.py --model sac_tb3_water --episodes 5
 ```
 Opens a **GUI window** by default; watch the robot carry water toward the target. Per episode it prints:
 ```
@@ -110,14 +93,14 @@ ep0: steps=.. reward=.. dist=.. water=.. success=True/False
 
 **Test whether it spills** (no model needed):
 ```bash
-$PY check_spill.py                    # full-speed straight drive (GUI)
-$PY check_spill.py --mode accel_stop  # accelerate → hard stop, repeated (most likely to spill)
-$PY check_spill.py --headless         # data only
+python3 check_spill.py                    # full-speed straight drive (GUI)
+python3 check_spill.py --mode accel_stop  # accelerate → hard stop, repeated (most likely to spill)
+python3 check_spill.py --headless         # data only
 ```
 
 **Static water demo** (no training):
 ```bash
-$PY tb3cup.py
+python3 tb3cup.py
 ```
 
 ---
